@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Today's Nutrition Summary</title>
+    <style>
+        table { border-collapse: collapse; width: 80%; margin: 20px 0; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>Today's Logged Meals</h1>
+
+    <table>
+        <tr>
+            <th>Dish Name</th>
+            <th>Calories (kcal)</th>
+            <th>Carbs (g)</th>
+            <th>Protein (g)</th>
+            <th>Fats (g)</th>
+            <th>Free Sugar (g)</th>
+            <th>Fibre (g)</th>
+            <th>Sodium (mg)</th>
+            <th>Calcium (mg)</th>
+            <th>Iron (mg)</th>
+            <th>Vitamin C (mg)</th>
+            <th>Folate (µg)</th>
+        </tr>
+        {% for meal in meals %}
+        <tr>
+            <td>{{ meal.Dish_Name }}</td>
+            <td>{{ meal.Calories }}</td>
+            <td>{{ meal.Carbohydrates }}</td>
+            <td>{{ meal.Protein }}</td>
+            <td>{{ meal.Fats }}</td>
+            <td>{{ meal.Free_Sugar }}</td>
+            <td>{{ meal.Fibre }}</td>
+            <td>{{ meal.Sodium }}</td>
+            <td>{{ meal.Calcium }}</td>
+            <td>{{ meal.Iron }}</td>
+            <td>{{ meal.VitaminC }}</td>
+            <td>{{ meal.Folate }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <th>Total</th>
+            <th>{{ totals.Calories }}</th>
+            <th>{{ totals.Carbohydrates }}</th>
+            <th>{{ totals.Protein }}</th>
+            <th>{{ totals.Fats }}</th>
+            <th>{{ totals.Free_Sugar }}</th>
+            <th>{{ totals.Fibre }}</th>
+            <th>{{ totals.Sodium }}</th>
+            <th>{{ totals.Calcium }}</th>
+            <th>{{ totals.Iron }}</th>
+            <th>{{ totals.VitaminC }}</th>
+            <th>{{ totals.Folate }}</th>
+        </tr>
+    </table>
+
+    <a href="{{ url_for('index') }}">Back to Log Meals</a>
+<div style="text-align:center; margin-top:20px;">
+    <form action="{{ url_for('gemini_advice') }}" method="post">
+        <button type="submit" class="button">Get Healthy Diet Suggestions</button>
+    </form>
+</div>
+
+{% if gemini_advice %}
+<div class="card" style="margin-top:20px;">
+    <h2 style="text-align:center; color:#2c3e50;">Gemini Diet Advice</h2>
+    <p>{{ gemini_advice.summary }}</p>
+    <p><strong>Key Nutrients:</strong> {{ gemini_advice.key_nutrients | join(', ') }}</p>
+    <p><strong>Tips:</strong> {{ gemini_advice.tips }}</p>
+    {% if gemini_advice.warnings %}
+    <p><strong>Warnings:</strong> {{ gemini_advice.warnings }}</p>
+    {% endif %}
+</div>
+{% endif %}
+
+</body>
+</html>
