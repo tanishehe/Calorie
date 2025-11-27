@@ -16,7 +16,7 @@ df = pd.read_csv("dishes.csv")
 df.columns = df.columns.str.strip()  # remove extra spaces
 
 # ---------- Gemini API ----------
-os.environ["GOOGLE_API_KEY"] = "AIzaSyCmOim5Aq_b3Mthu99GaCsczoY4DuPjAO0"
+os.environ["GOOGLE_API_KEY"] = "Put your geminiapi key"
 llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.3)
 prompt_template = ChatPromptTemplate.from_template("""
 You are a Nutrition Insights AI Assistant.
@@ -186,3 +186,4 @@ def gemini_advice():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
