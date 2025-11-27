@@ -1,0 +1,6 @@
+body { font-family: Arial, sans-serif; margin: 40px; }
+input, button { padding: 5px; margin: 5px; }
+.messages { list-style: none; padding: 0; }
+.messages li.error { color: red; }
+.messages li.success { color: green; }
+.messages li.info { color: blue; }
